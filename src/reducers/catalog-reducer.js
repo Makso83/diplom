@@ -28,10 +28,10 @@ export default (state = initialState, action) => {
       };
     }
     case CATALOG_ITEMS_FAILURE: {
-      return {...state, error: action.payload}
+      return { ...state, error: action.payload };
     }
     case CATALOG_RESET: {
-      return initialState;
+      return { ...state, items: [], offset: 0 };
     }
     case CATALOG_OFFSET_INCREMENTED: {
       return { ...state, offset: state.offset + 1 };

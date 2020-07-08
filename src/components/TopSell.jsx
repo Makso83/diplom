@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import CollectionCard from './CollectionCard';
 import { getTopSales } from '../fetchFunctions/fetchFunctions';
 import ErrorMessage from './ErrorMessage';
+import Preloader from './Preloader';
 
 function TopSell() {
   const dispatch = useDispatch();
@@ -23,17 +24,11 @@ function TopSell() {
   return (
     <section className="top-sales">
       <h2 className="text-center">Хиты продаж!</h2>
-      {/* TODO: заменить на прелоадер компонент */}
       <div className="row">
         {!isFetching
           ? items.map((item) => <CollectionCard key={item.id} item={item} />)
           : (
-            <div className="preloader">
-              <span />
-              <span />
-              <span />
-              <span />
-            </div>
+            <Preloader />
           )}
       </div>
     </section>
