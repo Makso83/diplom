@@ -31,7 +31,7 @@ export default (state = initialState, action) => {
       return {...state, error: action.payload}
     }
     case CATALOG_RESET: {
-      return { ...state, items: [], offset: 0 };
+      return initialState;
     }
     case CATALOG_OFFSET_INCREMENTED: {
       return { ...state, offset: state.offset + 1 };
