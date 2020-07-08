@@ -18,7 +18,7 @@ function HeaderMenu() {
         <NavLink
           activeClassName="active"
           className="nav-link"
-          to="/catalog.html"
+          to="/catalog"
         >
           Каталог
         </NavLink>
@@ -27,7 +27,7 @@ function HeaderMenu() {
         <NavLink
           activeClassName="active"
           className="nav-link"
-          to="/about.html"
+          to="/about"
         >
           О магазине
         </NavLink>
@@ -36,7 +36,7 @@ function HeaderMenu() {
         <NavLink
           activeClassName="active"
           className="nav-link"
-          to="/contacts.html"
+          to="/contacts"
         >
           Контакты
         </NavLink>

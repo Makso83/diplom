@@ -181,6 +181,21 @@ section {
   margin-bottom: 1em;
 }
 
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  flex-basis: 150px;
+}
+
+.img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
 /* Footer */
 .footer {
   padding: 0 25px;
@@ -563,4 +578,24 @@ h2, .h2 {
 .btn-outline-primary:hover {
   background-color: #727e86;
   border-color: #727e86;
+}
+
+/* Error message */
+.error-message {
+  background-color: #ff65a5;
+  color: white;
+  padding: 10px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.error-message > a {
+  color: white;
+  display: inline-block;
+  padding: 3px;
+  border: 1px solid white;
+  border-radius: 5px;
 }

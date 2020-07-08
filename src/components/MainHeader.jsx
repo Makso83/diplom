@@ -1,10 +1,29 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import mainLogo from '../img/header-logo.png';
+import { searchButtonPressed } from '../actions/searchAC';
 import HeaderMenu from './HeaderMenu';
 import HeaderCart from './HeaderCart';
 import SearchForm from './SearchForm';
+import { getCatalogItemBySearch } from '../fetchFunctions/fetchFunctions';
 
-function MainHeader() {
+function MainHeader({ history }) {
+  const dispatch = useDispatch();
+  const { searchInvisible, searchWord } = useSelector((state) => state.searchStatus);
+  const { currentCategory } = useSelector((state) => state.catalog);
+
+  const onSearchClick = () => {
+    if (!searchInvisible) {
+      if (searchWord !== '') {
+        history.push('/catalog');
+      }
+      dispatch(getCatalogItemBySearch(currentCategory, searchWord));
+    }
+
+    dispatch(searchButtonPressed());
+  };
+
   return (
     <header className="container">
       <div className="row">
@@ -18,7 +37,7 @@ function MainHeader() {
               <HeaderMenu />
               <div>
                 <div className="header-controls-pics">
-                  <div data-id="search-expander" className="header-controls-pic header-controls-search" />
+                  <div onClick={onSearchClick} data-id="search-expander" className="header-controls-pic header-controls-search" />
                   <HeaderCart />
                 </div>
                 <SearchForm />
@@ -32,4 +51,4 @@ function MainHeader() {
   );
 }
 
-export default MainHeader;
+export default withRouter(MainHeader);

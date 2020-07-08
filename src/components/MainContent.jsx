@@ -5,6 +5,8 @@ import Contacts from './Contacts';
 import Banner from './Banner';
 import bannerImg from '../img/banner.jpg';
 import PageNotFound from './PageNotFound';
+import IndexLoaded from './IndexLoaded';
+import MainCatalog from './MainCatalog';
 
 function MainContent() {
   return (
@@ -13,8 +15,10 @@ function MainContent() {
         <div className="col">
           <Banner image={bannerImg} imgAlt="К весне готовы" bannerHeader="К весне готовы!" />
           <Switch>
-            <Route path="/about.html" component={About} />
-            <Route path="/contacts.html" component={Contacts} />
+            <Route path="/" exact component={IndexLoaded} />
+            <Route path="/about" component={About} />
+            <Route path="/contacts" component={Contacts} />
+            <Route path="/catalog" render={() => <MainCatalog search />} />
             <Route component={PageNotFound} />
           </Switch>
         </div>

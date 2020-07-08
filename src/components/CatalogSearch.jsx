@@ -3,14 +3,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { searchFieldChanged } from '../actions/searchAC';
 import { getCatalogItemBySearch } from '../fetchFunctions/fetchFunctions';
 
-function SearchForm() {
-  const { searchInvisible, searchWord } = useSelector((state) => state.searchStatus);
+function CatalogSearch() {
+  const { searchWord } = useSelector((state) => state.searchStatus);
   const { currentCategory } = useSelector((state) => state.catalog);
-  const searchHeaderInput = useRef();
   const dispatch = useDispatch();
-
-  const onInputChange = () => {
-    dispatch(searchFieldChanged(searchHeaderInput.current.value));
+  const searchInput = useRef();
+  const onInputChanged = () => {
+    dispatch(searchFieldChanged(searchInput.current.value));
   };
 
   const onSearchSubmit = (evt) => {
@@ -20,13 +19,18 @@ function SearchForm() {
 
   return (
     <form
+      className="catalog-search-form form-inline"
       onSubmit={onSearchSubmit}
-      data-id="search-form"
-      className={`header-controls-search-form form-inline ${searchInvisible ? 'invisible' : null}`}
     >
-      <input onChange={onInputChange} ref={searchHeaderInput} className="form-control" value={searchWord} placeholder="Поиск" />
+      <input
+        ref={searchInput}
+        className="form-control"
+        placeholder="Поиск"
+        value={searchWord}
+        onChange={onInputChanged}
+      />
     </form>
   );
 }
 
-export default SearchForm;
+export default CatalogSearch;
