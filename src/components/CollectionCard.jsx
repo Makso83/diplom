@@ -1,8 +1,15 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useRef } from 'react';
+import nophoto from '../img/nophoto.png';
+import { NavLink } from 'react-router-dom';
 
 function CollectionCard(props) {
-  const { title, price, images } = props.item;
+  const { title, price, images, id } = props.item;
+  const picture = useRef();
+
+  const noPhoto = () => {
+    picture.current.src = nophoto;
+  };
+
   return (
     <div className="col-4">
       <div className="card catalog-item-card">
@@ -11,12 +18,14 @@ function CollectionCard(props) {
             src={images[0]}
             className="card-img-top img-fluid"
             alt={title}
+            ref={picture}
+            onError={noPhoto}
           />
         </div>
         <div className="card-body">
           <p className="card-text">{title}</p>
           <p className="card-text">{`${price} руб.`}</p>
-          <a href="/products/1.html" className="btn btn-outline-primary">Заказать</a>
+          <NavLink to={`/catalog/${id}`} className="btn btn-outline-primary">Заказать</NavLink>
         </div>
       </div>
     </div>

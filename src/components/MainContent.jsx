@@ -7,6 +7,9 @@ import bannerImg from '../img/banner.jpg';
 import PageNotFound from './PageNotFound';
 import IndexLoaded from './IndexLoaded';
 import MainCatalog from './MainCatalog';
+import ItemCardContainer from './ItemCardContainer';
+import Cart from './Cart';
+import ThanksForOrder from './ThanksForOrder';
 
 function MainContent() {
   return (
@@ -18,7 +21,10 @@ function MainContent() {
             <Route path="/" exact component={IndexLoaded} />
             <Route path="/about" component={About} />
             <Route path="/contacts" component={Contacts} />
+            <Route path="/catalog/:itemID" exact component={ItemCardContainer} />
             <Route path="/catalog" render={() => <MainCatalog search />} />
+            <Route path="/cart" component={Cart} />
+            <Route path="/success" component={ThanksForOrder} />
             <Route component={PageNotFound} />
           </Switch>
         </div>

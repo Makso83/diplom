@@ -1,5 +1,12 @@
 import {
-  CATEGORY_CHANGED, CATALOG_ITEMS_REQUEST, CATALOG_ITEMS_SUCCESS, CATALOG_RESET, CATALOG_OFFSET_INCREMENTED, CATALOG_SHOW_NO_MORE, CATALOG_GET_MORE, CATALOG_ITEMS_FAILURE,
+  CATEGORY_CHANGED,
+  CATALOG_ITEMS_REQUEST,
+  CATALOG_ITEMS_SUCCESS,
+  CATALOG_RESET,
+  CATALOG_OFFSET_INCREMENTED,
+  CATALOG_SHOW_NO_MORE,
+  CATALOG_GET_MORE,
+  CATALOG_ITEMS_FAILURE,
 } from '../actions/action-types';
 
 const initialState = {
@@ -31,7 +38,9 @@ export default (state = initialState, action) => {
       return { ...state, error: action.payload };
     }
     case CATALOG_RESET: {
-      return { ...state, items: [], offset: 0 };
+      return {
+        ...state, items: [], offset: 0, showNoMore: false,
+      };
     }
     case CATALOG_OFFSET_INCREMENTED: {
       return { ...state, offset: state.offset + 1 };

@@ -1,5 +1,4 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import Categories from './Categories';
 import CategoryGallery from './CategoryGallery';
 import Catalog from './Catalog';
