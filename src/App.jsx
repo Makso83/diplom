@@ -13,7 +13,6 @@ function App() {
 
   useEffect(() => {
     addCartToLocalStorage(cart);
-    console.log('localStorage interaction')
   }, [cart]);
 
   return (

@@ -7,9 +7,9 @@ export const addItemToCartAC = (title, id, size, quantity, price) => ({
   },
 });
 
-export const removeItemFromCartAC = (sku) => ({
+export const removeItemFromCartAC = (id, size) => ({
   type: CART_REMOVE_ITEM,
-  payload: sku,
+  payload: {id, size}
 });
 
 export const clearCartAC = () => ({

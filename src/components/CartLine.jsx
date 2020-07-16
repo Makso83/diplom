@@ -10,7 +10,7 @@ function CartLine(props) {
   const dispatch = useDispatch();
 
   const onDeleteHandler = () => {
-    dispatch(removeItemFromCartAC(id));
+    dispatch(removeItemFromCartAC(id, size));
   };
 
   return (

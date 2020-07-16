@@ -53,13 +53,6 @@ export const getCatalogItems = (category, offset = 0, searchWord = '') => async 
   }
 };
 
-export const getCatalogItemsDefault = (category) => async (dispatch) => {
-  dispatch(getCatalogAC());
-  dispatch(resetCatalog());
-  dispatch(getCatalogItems(category));
-  console.warn('Deprecated. Use getCatalogItemBySearch() instead.');
-};
-
 export const getCatalogItemBySearch = (category, searchWord) => async (dispatch) => {
   dispatch(getCatalogAC());
   dispatch(resetCatalog());

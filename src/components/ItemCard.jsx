@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import nophoto from '../img/nophoto.png';
 import ItemPropsTable from './ItemPropsTable';
 import { addItemToCartAC } from '../actions/cartAC';
+import { withRouter } from 'react-router-dom';
 
 function ItemCard(props) {
   const {
@@ -64,6 +65,7 @@ function ItemCard(props) {
 
   const addToCartHandler = () => {
     dispatch(addItemToCartAC(title, id, currentSize, counter, price));
+    props.history.push('/cart')
   };
 
   return (
@@ -117,4 +119,4 @@ function ItemCard(props) {
   );
 }
 
-export default ItemCard;
+export default withRouter(ItemCard);

@@ -11,7 +11,7 @@ export default (state = initialState, action) => {
       } = action.payload;
       let isNew = true;
       const newState = state.map((item) => {
-        if (item.id === id) {
+        if ((item.id === id) && (item.size === size)) {
           isNew = false;
           return { ...item, quantity: item.quantity + quantity };
         } return item;
@@ -21,7 +21,8 @@ export default (state = initialState, action) => {
       }] : newState;
     }
     case CART_REMOVE_ITEM: {
-      return state.filter((item) => item.id !== action.payload);
+      const {id, size} = action.payload;
+      return state.filter((item) => ((item.id !== id) && (item.size !== size)));
     }
 
     case CART_CLEAR: {
