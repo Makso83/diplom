@@ -24,7 +24,7 @@ export default (state = initialState, action) => {
       return { ...state, currentCategory: action.payload, showNoMore: false };
     }
     case CATALOG_ITEMS_REQUEST: {
-      return { ...state, isFetching: true };
+      return { ...state, isFetching: true, error: null };
     }
     case CATALOG_ITEMS_SUCCESS: {
       return {

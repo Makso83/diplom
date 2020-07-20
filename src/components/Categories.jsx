@@ -12,13 +12,17 @@ function Categories() {
     dispatch(getCategories());
   }, [dispatch]);
 
+  const tryAgain = () => {
+    dispatch(getCategories());
+  };
+
   if (error !== null) {
     return (
       <ErrorMessage>
         <p>Не удалось загрузить данные с сервера...</p>
-        <a href="/">Попробовать снова</a>
+        <button type="button" onClick={tryAgain}>Попробовать снова</button>
       </ErrorMessage>
-    );
+    ); 
   }
 
   return (

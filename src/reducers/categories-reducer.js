@@ -9,7 +9,7 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case CATEGORIES_REQUEST: {
-      return {...state, isFetching: true}
+      return {...state, isFetching: true, error: null}
     }
     case CATEGORIES_SUCCESS: {
       return {...state, isFetching: false, items: [...initialState.items, ...action.payload]}

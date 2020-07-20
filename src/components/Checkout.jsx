@@ -7,6 +7,7 @@ import Preloader from './Preloader';
 
 function Checkout({ history }) {
   const [isFetching, setIsFetching] = useState(false);
+  const [buttonDisabled, setButtonDisabled] = useState(true);
   const order = useSelector((state) => state.cart).map((item) => ({
     id: item.id,
     price: item.price,
@@ -33,9 +34,21 @@ function Checkout({ history }) {
     setIsFetching(false);
   };
 
-  if(isFetching) {
-    return <Preloader />
+  if (isFetching) {
+    return <Preloader />;
   }
+
+  const isFormFilled = () => {
+    if (phoneRef.current !== undefined) {
+      const check = (phoneRef.current.value !== '') && (adressRef.current.value !== '');
+      return check;
+    }
+    return false;
+  };
+
+  const onInputHandler = () => {
+    setButtonDisabled(!isFormFilled());
+  };
 
   return (
     <section className="order">
@@ -44,17 +57,17 @@ function Checkout({ history }) {
         <form className="card-body" onSubmit={submitHandler}>
           <div className="form-group">
             <label htmlFor="phone">Телефон</label>
-            <input className="form-control" id="phone" placeholder="Ваш телефон" ref={phoneRef} />
+            <input onChange={onInputHandler} className="form-control" id="phone" placeholder="Ваш телефон" ref={phoneRef} />
           </div>
           <div className="form-group">
             <label htmlFor="address">Адрес доставки</label>
-            <input className="form-control" id="address" placeholder="Адрес доставки" ref={adressRef} />
+            <input onChange={onInputHandler} className="form-control" id="address" placeholder="Адрес доставки" ref={adressRef} />
           </div>
           <div className="form-group form-check">
             <input type="checkbox" className="form-check-input" id="agreement" />
             <label className="form-check-label" htmlFor="agreement">Согласен с правилами доставки</label>
           </div>
-          <button type="submit" className="btn btn-outline-secondary">Оформить</button>
+          <button disabled={buttonDisabled} type="submit" className="btn btn-outline-secondary">Оформить</button>
         </form>
 
       </div>

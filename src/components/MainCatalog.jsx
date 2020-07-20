@@ -1,9 +1,9 @@
 import React from 'react';
 import Categories from './Categories';
 import CategoryGallery from './CategoryGallery';
-import Catalog from './Catalog';
 import GetMoreButton from './GetMoreButton';
 import CatalogSearch from './CatalogSearch';
+import CatalogContainer from './CatalogContainer';
 
 function MainCatalog(props) {
   const { search } = props;
@@ -16,7 +16,7 @@ function MainCatalog(props) {
       ) : null}
       <Categories />
       <CategoryGallery />
-      <Catalog />
+      <CatalogContainer />
       <GetMoreButton />
     </section>
   );

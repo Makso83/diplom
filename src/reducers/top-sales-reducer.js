@@ -8,7 +8,7 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case TOP_SALES_REQUEST: {
-      return { ...state, isFetching: true };
+      return { ...state, isFetching: true, error: null };
     }
     case TOP_SALES_SUCCESS: {
       return {...state, isFetching: false, items: action.payload}

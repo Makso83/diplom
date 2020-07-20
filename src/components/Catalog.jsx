@@ -5,24 +5,9 @@ import Preloader from './Preloader';
 import ErrorMessage from './ErrorMessage';
 import { getCatalogItemBySearch } from '../fetchFunctions/fetchFunctions';
 
-function Catalog() {
-  const {
-    currentCategory, items, isFetching, error,
-  } = useSelector((state) => state.catalog);
-  const dispatch = useDispatch();
-  const { searchWord } = useSelector((state) => state.searchStatus);
-  useEffect(() => {
-    dispatch(getCatalogItemBySearch(currentCategory, searchWord));
-  }, [currentCategory, dispatch, searchWord]);
+function Catalog(props) {
 
-  if (error !== null) {
-    return (
-      <ErrorMessage>
-        <p>Не удалось загрузить данные с сервера...</p>
-        <a href="/">Попробовать снова</a>
-      </ErrorMessage>
-    );
-  }
+  const {items, isFetching} = props;
 
   return (
     <div className="row">

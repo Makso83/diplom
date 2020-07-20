@@ -62,7 +62,7 @@ export const getCatalogItemBySearch = (category, searchWord) => async (dispatch)
 export const getItemById = (id) => async (dispatch) => {
   dispatch(itemRequestAC());
   try {
-    const response = await fetch(`http://localhost:7070/api/items/${id}`);
+    const response = await fetch(`${BASIC_URL}/items/${id}`);
     if (!response.ok) {
       throw new Error('Ошибка получения данных.');
     }
@@ -75,7 +75,7 @@ export const getItemById = (id) => async (dispatch) => {
 
 export const sendOrder = async (order) => {
   try {
-    const response = await fetch('http://localhost:7070/api/order', {
+    const response = await fetch(`${BASIC_URL}/api/order`, {
       method: 'POST',
       body: order,
       headers: {

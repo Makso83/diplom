@@ -12,11 +12,15 @@ function TopSell() {
     dispatch(getTopSales());
   }, [dispatch]);
 
+  const tryAgain = () => {
+    dispatch(getTopSales());
+  };
+
   if (error !== null) {
     return (
       <ErrorMessage>
         <p>Не удалось загрузить данные с сервера...</p>
-        <a href="/">Попробовать снова</a>
+        <button type="button" onClick={tryAgain}>Попробовать снова</button>
       </ErrorMessage>
     );
   }
