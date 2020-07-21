@@ -1,53 +1,66 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { sendOrder } from '../fetchFunctions/fetchFunctions';
 import { clearCartAC } from '../actions/cartAC';
 import Preloader from './Preloader';
+import { checkoutFieldChangedAC } from '../actions/checkoutAC';
+import { orderClearAC } from '../actions/orderAC';
+import ErrorMessage from './ErrorMessage';
 
 function Checkout({ history }) {
-  const [isFetching, setIsFetching] = useState(false);
-  const [buttonDisabled, setButtonDisabled] = useState(true);
-  const order = useSelector((state) => state.cart).map((item) => ({
+  const { isFetchingOrder, orderSuccess, error } = useSelector((state) => state.order);
+  const orderList = useSelector((state) => state.cart).map((item) => ({
     id: item.id,
     price: item.price,
     count: item.quantity,
   }));
+
+  const { phone, address, agreement } = useSelector((state) => state.checkout);
+
   const dispatch = useDispatch();
-  const phoneRef = useRef();
-  const adressRef = useRef();
+
+  useEffect(() => {
+    if (orderSuccess) {
+      dispatch(clearCartAC());
+      dispatch(orderClearAC());
+      history.push('/success');
+    }
+  }, [orderSuccess, dispatch, history]);
 
   const submitHandler = (evt) => {
     evt.preventDefault();
-    setIsFetching(true);
     const checkoutOrder = {
       owner: {
-        phone: phoneRef.current.value,
-        address: adressRef.current.value,
+        phone,
+        address,
       },
-      items: order,
+      items: orderList,
     };
     const orderJSON = JSON.stringify(checkoutOrder);
-    sendOrder(orderJSON);
-    dispatch(clearCartAC());
-    history.push('/success');
-    setIsFetching(false);
+    dispatch(sendOrder(orderJSON));
   };
 
-  if (isFetching) {
+  if (error !== null) {
+    return (
+      <ErrorMessage>
+        <p>Не удалось разместить заказ. Попробуйте позднее.</p>
+      </ErrorMessage>
+    );
+  }
+
+  if (isFetchingOrder) {
     return <Preloader />;
   }
 
-  const isFormFilled = () => {
-    if (phoneRef.current !== undefined) {
-      const check = (phoneRef.current.value !== '') && (adressRef.current.value !== '');
-      return check;
-    }
-    return false;
-  };
+  const isFormFilled = () => (phone !== '') && (address !== '') && (agreement);
 
-  const onInputHandler = () => {
-    setButtonDisabled(!isFormFilled());
+  const onInputHandler = (evt) => {
+    if (evt.target.id === 'agreement') {
+      dispatch(checkoutFieldChangedAC(evt.target.id, evt.target.checked));
+      return;
+    }
+    dispatch(checkoutFieldChangedAC(evt.target.id, evt.target.value));
   };
 
   return (
@@ -57,17 +70,17 @@ function Checkout({ history }) {
         <form className="card-body" onSubmit={submitHandler}>
           <div className="form-group">
             <label htmlFor="phone">Телефон</label>
-            <input onChange={onInputHandler} className="form-control" id="phone" placeholder="Ваш телефон" ref={phoneRef} />
+            <input onChange={onInputHandler} className="form-control" id="phone" placeholder="Ваш телефон" />
           </div>
           <div className="form-group">
             <label htmlFor="address">Адрес доставки</label>
-            <input onChange={onInputHandler} className="form-control" id="address" placeholder="Адрес доставки" ref={adressRef} />
+            <input onChange={onInputHandler} className="form-control" id="address" placeholder="Адрес доставки" />
           </div>
           <div className="form-group form-check">
-            <input type="checkbox" className="form-check-input" id="agreement" />
+            <input onChange={onInputHandler} type="checkbox" className="form-check-input" id="agreement" />
             <label className="form-check-label" htmlFor="agreement">Согласен с правилами доставки</label>
           </div>
-          <button disabled={buttonDisabled} type="submit" className="btn btn-outline-secondary">Оформить</button>
+          <button disabled={!isFormFilled()} type="submit" className="btn btn-outline-secondary">Оформить</button>
         </form>
 
       </div>

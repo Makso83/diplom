@@ -1,13 +1,9 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
 import CollectionCard from './CollectionCard';
 import Preloader from './Preloader';
-import ErrorMessage from './ErrorMessage';
-import { getCatalogItemBySearch } from '../fetchFunctions/fetchFunctions';
 
 function Catalog(props) {
-
-  const {items, isFetching} = props;
+  const { items, isFetching } = props;
 
   return (
     <div className="row">

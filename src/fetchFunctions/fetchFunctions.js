@@ -4,6 +4,7 @@ import {
   getCatalogSuccess, getCatalogFailure, getCatalogAC, resetCatalog, showNoMore,
 } from '../actions/catalogAC';
 import { itemRequestAC, itemSuccessAC, itemErrorAC } from '../actions/itemAC';
+import { orderSendAC, orderSuccessAC, orderFailureAC } from '../actions/orderAC';
 
 const BASIC_URL = 'http://localhost:7070/api';
 
@@ -73,9 +74,10 @@ export const getItemById = (id) => async (dispatch) => {
   }
 };
 
-export const sendOrder = async (order) => {
+export const sendOrder = (order) => async (dispatch) => {
+  dispatch(orderSendAC());
   try {
-    const response = await fetch(`${BASIC_URL}/api/order`, {
+    const response = await fetch(`${BASIC_URL}/order`, {
       method: 'POST',
       body: order,
       headers: {
@@ -85,7 +87,8 @@ export const sendOrder = async (order) => {
     if (!response.ok) {
       throw new Error('Ошибка отправки данных.');
     }
+    dispatch(orderSuccessAC());
   } catch (err) {
-    throw new Error(err);
+    dispatch(orderFailureAC(err));
   }
 };

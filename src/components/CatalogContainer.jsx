@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import CollectionCard from './CollectionCard';
-import Preloader from './Preloader';
 import ErrorMessage from './ErrorMessage';
 import { getCatalogItemBySearch } from '../fetchFunctions/fetchFunctions';
 import Catalog from './Catalog';

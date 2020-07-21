@@ -11,6 +11,8 @@ import catalogReducer from '../reducers/catalog-reducer';
 import searchReducer from '../reducers/search-reducer';
 import itemReducer from '../reducers/item-reducer';
 import cartReducer from '../reducers/cart-reducer';
+import checkoutReducer from '../reducers/checkout-reducer';
+import orderReducer from '../reducers/order-reducer';
 
 const reducers = combineReducers({
   topSales: topSalesReducer,
@@ -19,6 +21,8 @@ const reducers = combineReducers({
   searchStatus: searchReducer,
   item: itemReducer,
   cart: cartReducer,
+  checkout: checkoutReducer,
+  order: orderReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
