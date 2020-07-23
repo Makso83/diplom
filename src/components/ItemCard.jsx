@@ -1,9 +1,9 @@
 import React, { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import nophoto from '../img/nophoto.png';
 import ItemPropsTable from './ItemPropsTable';
 import { addItemToCartAC } from '../actions/cartAC';
-import { withRouter } from 'react-router-dom';
 
 function ItemCard(props) {
   const {
@@ -65,7 +65,7 @@ function ItemCard(props) {
 
   const addToCartHandler = () => {
     dispatch(addItemToCartAC(title, id, currentSize, counter, price));
-    props.history.push('/cart')
+    props.history.push('/cart');
   };
 
   return (
@@ -95,9 +95,9 @@ function ItemCard(props) {
               <p>
                 Количество:
                 <span className="btn-group btn-group-sm pl-2">
-                  <button className="btn btn-secondary" onClick={counterDecrement}>-</button>
+                  <button type="button" className="btn btn-secondary" onClick={counterDecrement}>-</button>
                   <span className="btn btn-outline-primary">{counter}</span>
-                  <button className="btn btn-secondary" onClick={counterIncrement}>+</button>
+                  <button type="button" className="btn btn-secondary" onClick={counterIncrement}>+</button>
                 </span>
               </p>
             ) : <p>нет в наличии</p>}
@@ -105,6 +105,7 @@ function ItemCard(props) {
           {isItemAvailable
             ? (
               <button
+                type="button"
                 className="btn btn-danger btn-block btn-lg"
                 onClick={addToCartHandler}
                 disabled={!isToCartButtonEnable}

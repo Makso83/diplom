@@ -6,6 +6,7 @@ function CartLine(props) {
   const {
     id, title, size, quantity, price,
   } = props.item;
+  const positionNumber = props.nn;
 
   const dispatch = useDispatch();
 
@@ -15,7 +16,7 @@ function CartLine(props) {
 
   return (
     <tr>
-      <th scope="row">{props.nn}</th>
+      <th scope="row">{positionNumber}</th>
       <td><a href="/products/1.html">{title}</a></td>
       <td>{size}</td>
       <td>{quantity}</td>

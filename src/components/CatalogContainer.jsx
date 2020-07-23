@@ -8,8 +8,11 @@ function CatalogContainer() {
   const {
     currentCategory, items, isFetching, error,
   } = useSelector((state) => state.catalog);
+
   const dispatch = useDispatch();
+
   const { searchWord } = useSelector((state) => state.searchStatus);
+  
   useEffect(() => {
     dispatch(getCatalogItemBySearch(currentCategory, searchWord));
   }, [currentCategory, dispatch, searchWord]);

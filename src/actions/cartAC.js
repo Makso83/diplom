@@ -9,7 +9,7 @@ export const addItemToCartAC = (title, id, size, quantity, price) => ({
 
 export const removeItemFromCartAC = (id, size) => ({
   type: CART_REMOVE_ITEM,
-  payload: {id, size}
+  payload: { id, size },
 });
 
 export const clearCartAC = () => ({
